@@ -13,7 +13,7 @@ public class SortByCountMapper extends Mapper<LongWritable, Text, LongWritable, 
     @Override
     protected void map(LongWritable key, Text value, Context context)
             throws IOException, InterruptedException {
-        //输入格式: <Key>\t<Value>
+        //input format: <Key>\t<Value>
         String[] parts = value.toString().split("\t");
         if (parts.length == 2) {
             String keyStr = parts[0].trim();

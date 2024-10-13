@@ -19,10 +19,10 @@ public class MapReduceHomework {
         Configuration conf = new Configuration();
 
         if ("task1".equalsIgnoreCase(task)) {
-            //统计股票代码
             Job job1 = Job.getInstance(conf, "Stock Count");
             job1.setJarByClass(MapReduceHomework.class);
             job1.setMapperClass(StockCountMapper.class);
+            job1.setCombinerClass(StockCountReducer.class); // add Combiner
             job1.setReducerClass(StockCountReducer.class);
             job1.setOutputKeyClass(Text.class);
             job1.setOutputValueClass(LongWritable.class);
@@ -32,7 +32,7 @@ public class MapReduceHomework {
             if (!success) {
                 System.exit(1);
             }
-            //按次数排序
+
             Job job2 = Job.getInstance(conf, "Sort Stocks by Count");
             job2.setJarByClass(MapReduceHomework.class);
             job2.setMapperClass(SortByCountMapper.class);
@@ -49,11 +49,10 @@ public class MapReduceHomework {
 
         } else if ("task2".equalsIgnoreCase(task)) {
             conf.set("stopwords.path", stopWordsPath);
-
-            //统计单词频次
             Job job1 = Job.getInstance(conf, "Word Count");
             job1.setJarByClass(MapReduceHomework.class);
             job1.setMapperClass(WordCountMapper.class);
+            job1.setCombinerClass(WordCountReducer.class);
             job1.setReducerClass(WordCountReducer.class);
             job1.setOutputKeyClass(Text.class);
             job1.setOutputValueClass(LongWritable.class);
@@ -64,12 +63,10 @@ public class MapReduceHomework {
                 System.exit(1);
             }
 
-            //按次数排序
             Job job2 = Job.getInstance(conf, "Sort Words by Count");
             job2.setJarByClass(MapReduceHomework.class);
             job2.setMapperClass(SortByCountMapper.class);
             job2.setReducerClass(SortByCountReducer.class);
-            //降序
             job2.setSortComparatorClass(LongWritable.DecreasingComparator.class);
             job2.setOutputKeyClass(LongWritable.class);
             job2.setOutputValueClass(Text.class);
@@ -80,7 +77,7 @@ public class MapReduceHomework {
                 System.exit(1);
             }
         } else {
-            System.err.println("Invalid task specified. Use 'task1' or 'task2'.");
+            System.err.println("Invalid task specified. Please input task1 or task2.");
             System.exit(-1);
         }
     }

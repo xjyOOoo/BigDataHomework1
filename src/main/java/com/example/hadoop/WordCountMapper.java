@@ -37,13 +37,12 @@ public class WordCountMapper extends Mapper<LongWritable, Text, Text, LongWritab
     @Override
     protected void map(LongWritable key, Text value, Context context)
             throws IOException, InterruptedException {
-        //CSV格式: <索引>,<标题>,<发布时间戳记>,<股票代码>
+        //index,headline,date,stock
         String line = value.toString();
         String[] fields = line.split(",", -1);
         if (fields.length == 4) {
             String headline = fields[1].trim();
             if (!headline.isEmpty()) {
-                //去除标点符号，转换为小写
                 String cleaned = headline.replaceAll("[^a-zA-Z0-9\\s]", "").toLowerCase();
                 String[] words = cleaned.split("\\s+");
                 for (String word : words) {

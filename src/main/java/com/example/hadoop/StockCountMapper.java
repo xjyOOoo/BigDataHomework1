@@ -2,6 +2,8 @@ package com.example.hadoop;
 
 import java.io.IOException;
 
+import javax.naming.Context;
+
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -13,7 +15,7 @@ public class StockCountMapper extends Mapper<LongWritable, Text, Text, LongWrita
     @Override
     protected void map(LongWritable key, Text value, Context context)
             throws IOException, InterruptedException {
-        //CSV格式: <索引>,<标题>,<发布时间戳记>,<股票代码>
+        //index,headline,date,stock
         String line = value.toString();
         String[] fields = line.split(",", -1);
 
