@@ -24,6 +24,7 @@ hadoop jar target/MapReduceHomework-1.0-SNAPSHOT.jar /user/jyxie/input/analyst_r
 hadoop jar target/MapReduceHomework-1.0-SNAPSHOT.jar /user/jyxie/input/analyst_ratings.csv /user/jyxie/output/temp_task2 /user/jyxie/output/final_task2 /user/jyxie/input/stop-word-list.txt task2
 
 运行成功的web截图： ![](pictures/image.png)
+输出见output目录下文件
 
 # III.不足与改进之处
 1. 使用了临时输出路径，需要用户提供，用户使用不当容易出现错误，可以更改为根据时间戳自动生成，并在使用后及时删除
