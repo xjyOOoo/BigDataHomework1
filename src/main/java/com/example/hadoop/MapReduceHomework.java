@@ -40,6 +40,7 @@ public class MapReduceHomework {
             job2.setSortComparatorClass(LongWritable.DecreasingComparator.class);
             job2.setOutputKeyClass(LongWritable.class);
             job2.setOutputValueClass(Text.class);
+            job2.setNumReduceTasks(1);
             FileInputFormat.addInputPath(job2, new Path(tempOutputPath));
             FileOutputFormat.setOutputPath(job2, new Path(finalOutputPath));
             success = job2.waitForCompletion(true);
